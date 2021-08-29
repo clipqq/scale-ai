@@ -1,3 +1,4 @@
+// From here to Line 35, logging and configuration
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
@@ -28,24 +29,29 @@ const app = express()
 
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common'
 
-//////////////////////////////////////////////////////////////////////////
-const api_handler = require('./api-handler')
-const outputHandler = require('./output-handler')
-
 app.use(morgan(morganOption))
 app.use(helmet())
 app.use(cors())
 
+//////////////////////////////////////////////////////////////////////////
+
+// Require handler modules here
+const apiHandler = require('./api-handler')
+const outputHandler = require('./output-handler')
+const overlapTestHandler = require('./overlap-test-handler')
+
+// Home endpoint
 app.get('/', (req, res) => {
     res.send('Hello, world!')
 })
 
+// Endpoint to make API call and write results to JSON file
 app.get('/api', (req, res) => {
-    api_handler
+    apiHandler
         .makeApiCall()
         .then((response) => {
             res.json(response)
-            console.log(response)
+            overlapTestHandler.overlapTest(response)
             outputHandler.jsonExport(response)
         })
         .catch((error) => {
@@ -53,10 +59,7 @@ app.get('/api', (req, res) => {
         })
 })
 
-// app.get('/api/exportjson', (req, res) => {
-
-// })
-
+// Server error handling
 app.use(function errorHandler(error, req, res, next) {
     let response
     if (NODE_ENV === 'production') {

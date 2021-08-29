@@ -2,16 +2,11 @@ const fs = require('fs')
 
 module.exports = {
     jsonExport: function (data) {
-        let rawJson = data
-
-        // parse json
-        let parsedJson = JSON.parse(rawJson)
-        console.log(parsedJson)
-
-        // stringify JSON Object
+        // Parse and stringify JSON
+        let parsedJson = JSON.parse(data)
         let formattedJson = JSON.stringify(parsedJson)
-        console.log(formattedJson)
 
+        // Write formatted data to `output.json` at root level directory
         fs.writeFile('output.json', formattedJson, 'utf8', function (err) {
             if (err) {
                 console.log(

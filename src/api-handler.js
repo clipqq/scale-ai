@@ -1,13 +1,30 @@
 const request = require('request')
-const { APIURL, APIKEY } = require('./config')
+
+// Bringing in parameters from .ENV here
+const {
+    APIURL,
+    APIKEY,
+    TASK_STATUS,
+    PROJECT_NAME,
+    CUSTOMER_REVIEW_STATUS,
+} = require('./config')
+
+// Setting Url, parameters, and headers here
 let options = {
     method: 'GET',
     url: APIURL,
+    qs: {
+        status: TASK_STATUS,
+        project: PROJECT_NAME,
+        // customer_review_status: CUSTOMER_REVIEW_STATUS,
+    },
     headers: {
         Authorization: APIKEY,
         Accept: 'application/json',
     },
 }
+
+// Making the API call
 module.exports = {
     makeApiCall: function (url) {
         return new Promise((resolve, reject) => {
