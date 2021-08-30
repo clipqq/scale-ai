@@ -10,11 +10,11 @@ module.exports = {
         fs.writeFile('output.json', formattedJson, 'utf8', function (err) {
             if (err) {
                 console.log(
-                    'An error occured while writing JSON Object to File.',
+                    'Error with Raw API output JSON',
                 )
                 return console.log(err)
             }
-            console.log('JSON file has been saved.')
+            console.log('Raw API output JSON file saved')
         })
     },
 }
