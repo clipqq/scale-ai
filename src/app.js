@@ -51,8 +51,8 @@ app.get('/api', (req, res) => {
         .makeApiCall()
         .then((response) => {
             res.json(response)
-            overlapTestHandler.overlapTest(response)
             outputHandler.jsonExport(response)
+            overlapTestHandler.overlapTest()
         })
         .catch((error) => {
             res.send(error)
