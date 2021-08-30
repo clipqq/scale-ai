@@ -1,26 +1,26 @@
-# Express Boilerplate!
+## About the App 
 
-This is a boilerplate project used for starting new projects!
+This app runs a test for "overlaps" on Annotation boxes and identifies whether boxes are truncating/occluding other boxes.
 
-## Set up
+With additional time and resources, a feature enhancement with percentage overlap and  comparisons to the Occlusion/Truncation percentages could be useful as well as more well-designed JSON output method/format and a front-end or CLI from which to specify API parameters to call other Scale Accounts and Tasks.
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## How to Use
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
+Visiting the `/api` endpoint will automatically make a GET request to the Scale API with credentials specified in the `.env` file. If different API headers or parameters are required, they can be adjusted in the `.env`.
+
+Once the response from Scale API is received, the `overlap-test-handler.js` module will will the overlap test and output a JSON file to the root directory to specify which Tasks and Annotation UUIDs have an overlap with another Annotation.
+
+## Local Set up
+
+Complete the following steps to run the App locally:
+
+1. Clone this repository to your local machine with `git clone`
 2. `cd` into the cloned repository
 3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
 4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
 
 ## Scripts
 
 Start the application `npm start`
 
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+Run tests `npm test`
