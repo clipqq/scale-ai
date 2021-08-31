@@ -38,7 +38,7 @@ app.use(cors())
 // Require handler modules here
 const apiHandler = require('./api-handler')
 const outputHandler = require('./output-handler')
-const overlapTestHandler = require('./overlap-test-handler')
+const colorTestHandler = require('./color-test-handler')
 
 // Home endpoint
 app.get('/', (req, res) => {
@@ -52,7 +52,7 @@ app.get('/api', (req, res) => {
         .then((response) => {
             res.json(response)
             outputHandler.jsonExport(response)
-            overlapTestHandler.overlapTest()
+            colorTestHandler.colorTest()
         })
         .catch((error) => {
             res.send(error)
