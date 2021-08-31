@@ -39,6 +39,7 @@ app.use(cors())
 const apiHandler = require('./api-handler')
 const outputHandler = require('./output-handler')
 const overlapTestHandler = require('./overlap-test-handler')
+const timeTestHandler = require('./time-test-handler')
 
 // Home endpoint
 app.get('/', (req, res) => {
@@ -52,7 +53,8 @@ app.get('/api', (req, res) => {
         .then((response) => {
             res.json(response)
             outputHandler.jsonExport(response)
-            overlapTestHandler.overlapTest()
+            // overlapTestHandler.overlapTest()
+            timeTestHandler.timeTest()
         })
         .catch((error) => {
             res.send(error)
