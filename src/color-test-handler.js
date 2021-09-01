@@ -19,6 +19,7 @@ const colorTest = () => {
 
             colorResult.push({
                 TaskId: taskId,
+                Errors: []
             })
 
             // Loop annotations for background color mismatches
@@ -29,7 +30,7 @@ const colorTest = () => {
                             boxData[b].attributes.background_color !== 'other'
                         ) {
                             console.log("background_color is not 'other'")
-                            colorResult.push({
+                            colorResult[i].Errors.push({
                                 UUID: boxData[b].uuid,
                                 SignLabel: 'traffic_control_sign',
                                 BackgroundColor:

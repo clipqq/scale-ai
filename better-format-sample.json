@@ -1,0 +1,19 @@
+[
+    {
+        "TaskId": "5f127f6f26831d0010e985e5",
+        "errors": [
+            {
+                "UUID": "ada7893a-3ee1-4d69-b06b-87240a9522cd",
+                "SignLabel": "traffic_control_sign",
+                "BackgroundColor": "yellow",
+                "Warning": "'background_color' should be 'other'"
+            },
+            {
+                "UUID": "15e7ee7c-ae01-434d-a0b7-54d4403d5533",
+                "SignLabel": "traffic_control_sign",
+                "BackgroundColor": "red",
+                "Warning": "'background_color' should be 'other'"
+            }
+        ]
+    }
+]
