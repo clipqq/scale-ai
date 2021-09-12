@@ -6,7 +6,6 @@ const {
     APIKEY,
     TASK_STATUS,
     PROJECT_NAME,
-    CUSTOMER_REVIEW_STATUS,
 } = require('./config')
 
 // Setting Url, parameters, and headers here

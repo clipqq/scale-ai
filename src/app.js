@@ -41,21 +41,69 @@ const outputHandler = require('./output-handler')
 const colorTestHandler = require('./color-test-handler')
 const overlapTestHandler = require('./overlap-test-handler')
 const timeTestHandler = require('./time-test-handler')
+const slackApiHandler = require('./slack-api-handler')
+const slackTestHandler = require('./slack-api-test-handler')
 
 // Home endpoint
 app.get('/', (req, res) => {
     res.send('Hello, world!')
 })
 
+app.get('/slacktest', (req, res) => {
+    slackTestHandler
+        .getTest()
+        .then((response) => {
+            console.log('got slack test')
+            res.send(response)
+        })
+        .catch((error) => {
+            res.send(error)
+        })
+})
+
+app.get('/slackstatus', (req, res) => {
+    slackApiHandler
+        .getStatus()
+        .then((response) => {
+            console.log('got slack response')
+            res.send(response)
+        })
+        .catch((error) => {
+            res.send(error)
+        })
+})
+
 // Endpoint to make API call and write results to JSON file
-app.get('/api', (req, res) => {
+app.get('/color', (req, res) => {
+    apiHandler
+        .makeApiCall()
+        .then((response) => {
+            res.json(response)
+            colorTestHandler.colorTest()
+        })
+        .catch((error) => {
+            res.send(error)
+        })
+})
+
+app.get('/overlap', (req, res) => {
     apiHandler
         .makeApiCall()
         .then((response) => {
             res.json(response)
             outputHandler.jsonExport(response)
-            colorTestHandler.colorTest()
-            // overlapTestHandler.overlapTest()
+            overlapTestHandler.overlapTest()
+        })
+        .catch((error) => {
+            res.send(error)
+        })
+})
+
+app.get('/time', (req, res) => {
+    apiHandler
+        .makeApiCall()
+        .then((response) => {
+            res.json(response)
             timeTestHandler.timeTest()
         })
         .catch((error) => {
