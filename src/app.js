@@ -92,6 +92,7 @@ app.get('/color-results.json', (req, res) => {
 
 // Endpoint to make API call and write results to JSON file
 app.get('/color', (req, res) => {
+    let output = {}
     apiHandler
         .makeApiCall()
         .then((response) => {
@@ -104,6 +105,7 @@ app.get('/color', (req, res) => {
             }
             res.json(output)
         })
+        res.json(output)
         .catch((error) => {
             res.send(error)
         })
