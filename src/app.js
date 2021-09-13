@@ -84,12 +84,7 @@ app.get('/slackstatus', (req, res) => {
         })
 })
 
-app.get('/color-results.json', (req, res) => {
-    let file = './color-results.json'
-    res.download(file)
-})
-
-// Endpoint to make API call and write results to JSON file
+// COLOR Analysis endpoints
 app.get('/color', (req, res) => {
     apiHandler
         .makeApiCall()
@@ -102,10 +97,14 @@ app.get('/color', (req, res) => {
         })
     let output = {
         response_type: 'in_channel',
-        text: 'Scale AI Color Test has been processed. You may view test results here: ',
+        text: 'Scale AI Color Analysis has been processed. You may view test results here: ',
         attachments: [
             {
-                image_url:
+                color: '#36a64f',
+                author_name: 'Scale AI Testing Bot',
+                author_icon: 'https://tinyurl.com/22a79uc5',
+                title: 'Color Test Downloadable JSON',
+                title_link:
                     'https://lit-escarpment-97177.herokuapp.com/color-results.json',
             },
         ],
@@ -113,6 +112,12 @@ app.get('/color', (req, res) => {
     res.json(output)
 })
 
+app.get('/color-results.json', (req, res) => {
+    let file = './color-results.json'
+    res.download(file)
+})
+
+// OVERLAP Analysis endpoints
 app.get('/overlap', (req, res) => {
     apiHandler
         .makeApiCall()
@@ -124,8 +129,28 @@ app.get('/overlap', (req, res) => {
         .catch((error) => {
             res.send(error)
         })
+    let output = {
+        response_type: 'in_channel',
+        text: 'Scale AI Overlap Analysis has been processed. You may view test results here: ',
+        attachments: [
+            {
+                color: '#FF5733',
+                author_name: 'Scale AI Testing Bot',
+                author_icon: 'https://tinyurl.com/22a79uc5',
+                title: 'Overlap Test Downloadable JSON',
+                title_link:
+                    'https://lit-escarpment-97177.herokuapp.com/overlap-results.json',
+            },
+        ],
+    }
+    res.json(output)
+})
+app.get('/overlap-results.json', (req, res) => {
+    let file = './overlap-results.json'
+    res.download(file)
 })
 
+// TIME Analysis endpoints
 app.get('/time', (req, res) => {
     apiHandler
         .makeApiCall()
@@ -136,9 +161,28 @@ app.get('/time', (req, res) => {
         .catch((error) => {
             res.send(error)
         })
+    let output = {
+        response_type: 'in_channel',
+        text: 'Scale AI Time Analysis has been processed. You may view test results here: ',
+        attachments: [
+            {
+                color: '#ECFF00',
+                author_name: 'Scale AI Testing Bot',
+                author_icon: 'https://tinyurl.com/22a79uc5',
+                title: 'Time Test Downloadable JSON',
+                title_link:
+                    'https://lit-escarpment-97177.herokuapp.com/time-results.json',
+            },
+        ],
+    }
+    res.json(output)
+})
+app.get('/time-results.json', (req, res) => {
+    let file = './time-results.json'
+    res.download(file)
 })
 
-// Handle POSTs
+// POST test
 app.post('/post-test', (req, res) => {
     console.log('Got body:', req.body)
     let data = {
@@ -150,14 +194,6 @@ app.post('/post-test', (req, res) => {
                     'https://www.pcgamesn.com/wp-content/uploads/2021/09/knights-of-the-old-republic-remake-pc-580x334.jpg',
             },
         ],
-    }
-    res.json(data)
-})
-
-app.post('/slack-status', (req, res) => {
-    let data = {
-        response_type: 'in_channel',
-        text: `Here's the status:${status}`,
     }
     res.json(data)
 })
