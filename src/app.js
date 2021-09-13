@@ -1,4 +1,4 @@
-// From here to Line 35, logging and configuration
+// From here to Line 46, logging and configuration
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
@@ -32,11 +32,6 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// const slackApp = new App({
-//     signingSecret: process.env.SLACK_SIGNING_SECRET,
-//     token: process.env.SLACK_BOT_TOKEN,
-//   });
-
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common'
 
 app.use(morgan(morganOption))
@@ -47,41 +42,13 @@ app.use(cors())
 
 // Require handler modules here
 const apiHandler = require('./api-handler')
-const outputHandler = require('./output-handler')
 const colorTestHandler = require('./color-test-handler')
 const overlapTestHandler = require('./overlap-test-handler')
 const timeTestHandler = require('./time-test-handler')
-const slackApiHandler = require('./slack-api-handler')
-const slackTestHandler = require('./slack-api-test-handler')
 
 // Home endpoint
 app.get('/', (req, res) => {
-    res.send('Hello, world!')
-})
-
-app.get('/slacktest', (req, res) => {
-    slackTestHandler
-        .getTest()
-        .then((response) => {
-            console.log('got slack test')
-            res.send(response)
-        })
-        .catch((error) => {
-            res.send(error)
-        })
-})
-
-app.get('/slackstatus', (req, res) => {
-    slackApiHandler
-        .getStatus()
-        .then((response) => {
-            console.log('got slack response')
-            res.send(response)
-            return response
-        })
-        .catch((error) => {
-            res.send(error)
-        })
+    res.send('This app is ready!')
 })
 
 // COLOR Analysis endpoints

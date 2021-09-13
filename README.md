@@ -1,5 +1,19 @@
-## Notes
-Slash command URL requires deployment URL
+## Purpose
+
+A proof of concept on how test results could be delivered through Slack on demand. An integration between the customer’s ML platform (ScaleAI) and Slack will both trigger the analysis tests and output the results as downloadable JSON files through Slack.
+
+## Dev Notes
+
+Workspace channel:
+https://ta-project-workspace.slack.com/archives/C02DR34KL0P
+
+The following slash commands are available in the above channel:
+    `/overlap-test`
+    `/color-test`
+    `/time-test`
+
+Slack App:
+https://api.slack.com/apps/A02EVFEQ8C8
 
 
 ## Local Set up
