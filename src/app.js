@@ -85,30 +85,31 @@ app.get('/slackstatus', (req, res) => {
 })
 
 app.get('/color-results.json', (req, res) => {
-    let file = ('./color-results.json')
+    let file = './color-results.json'
     res.download(file)
 })
 
-
 // Endpoint to make API call and write results to JSON file
 app.get('/color', (req, res) => {
-    let output = {}
-    apiHandler
-        .makeApiCall()
-        .then((response) => {
-            // res.json(response)
-            colorTestHandler.colorTest()
-            let output = {
-                response_type: 'in_channel',
-                text: 'Color Test Here: ',
-                attachments: ['https://lit-escarpment-97177.herokuapp.com/color-results.json'],
-            }
-            res.json(output)
-        })
+    apiHandler.makeApiCall().then((response) => {
+        // res.json(response)
+        colorTestHandler.colorTest()
         res.json(output)
-        .catch((error) => {
-            res.send(error)
-        })
+    })
+    res.json(output).catch((error) => {
+        res.send(error)
+    })
+    let output = {
+        response_type: 'in_channel',
+        text: 'Color Test Here: ',
+        attachments: [
+            {
+                image_url:
+                    'https://lit-escarpment-97177.herokuapp.com/color-results.json',
+            },
+        ],
+    }
+    res.json(output)
 })
 
 app.get('/overlap', (req, res) => {
