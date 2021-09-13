@@ -91,17 +91,18 @@ app.get('/color-results.json', (req, res) => {
 
 // Endpoint to make API call and write results to JSON file
 app.get('/color', (req, res) => {
-    apiHandler.makeApiCall().then((response) => {
-        // res.json(response)
-        colorTestHandler.colorTest()
-        res.json(output)
-    })
-    res.json(output).catch((error) => {
-        res.send(error)
-    })
+    apiHandler
+        .makeApiCall()
+        .then((response) => {
+            // res.json(response)
+            colorTestHandler.colorTest()
+        })
+        .catch((error) => {
+            res.send(error)
+        })
     let output = {
         response_type: 'in_channel',
-        text: 'Color Test Here: ',
+        text: 'Scale AI Color Test has been processed. You may view test results here: ',
         attachments: [
             {
                 image_url:
