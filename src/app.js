@@ -89,7 +89,6 @@ app.get('/color', (req, res) => {
     apiHandler
         .makeApiCall()
         .then((response) => {
-            // res.json(response)
             colorTestHandler.colorTest()
         })
         .catch((error) => {
@@ -122,8 +121,6 @@ app.get('/overlap', (req, res) => {
     apiHandler
         .makeApiCall()
         .then((response) => {
-            res.json(response)
-            outputHandler.jsonExport(response)
             overlapTestHandler.overlapTest()
         })
         .catch((error) => {
@@ -137,7 +134,7 @@ app.get('/overlap', (req, res) => {
                 color: '#FF5733',
                 author_name: 'Scale AI Testing Bot',
                 author_icon: 'https://tinyurl.com/22a79uc5',
-                title: 'Overlap Test Downloadable JSON',
+                title: 'Overlap Analysis Downloadable JSON',
                 title_link:
                     'https://lit-escarpment-97177.herokuapp.com/overlap-results.json',
             },
@@ -155,7 +152,6 @@ app.get('/time', (req, res) => {
     apiHandler
         .makeApiCall()
         .then((response) => {
-            res.json(response)
             timeTestHandler.timeTest()
         })
         .catch((error) => {
@@ -169,7 +165,7 @@ app.get('/time', (req, res) => {
                 color: '#ECFF00',
                 author_name: 'Scale AI Testing Bot',
                 author_icon: 'https://tinyurl.com/22a79uc5',
-                title: 'Time Test Downloadable JSON',
+                title: 'Time Analysis Downloadable JSON',
                 title_link:
                     'https://lit-escarpment-97177.herokuapp.com/time-results.json',
             },
