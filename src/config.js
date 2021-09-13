@@ -9,4 +9,6 @@ module.exports = {
 
     SLACKAPIURL: process.env.SLACK_URL,
     SLACKAPIKEY: process.env.SLACK_KEY,
+    SLACK_SIGNING_SECRET:process.env.SLACK_SIGNING_SECRET,
+    SLACK_BOT_TOKEN:process.env.SLACK_BOT_TOKEN
 }

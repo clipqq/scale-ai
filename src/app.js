@@ -24,8 +24,21 @@ if (NODE_ENV !== 'production') {
         }),
     )
 }
-
+const { App } = require('@slack/bolt')
 const app = express()
+const bodyParser = require('body-parser')
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
+// const slackApp = new App({
+//     signingSecret: process.env.SLACK_SIGNING_SECRET,
+//     token: process.env.SLACK_BOT_TOKEN,
+//   });
+  
+
 
 const morganOption = NODE_ENV === 'production' ? 'tiny' : 'common'
 
@@ -109,6 +122,22 @@ app.get('/time', (req, res) => {
         .catch((error) => {
             res.send(error)
         })
+})
+
+// Handle POSTs
+app.post('/post-test', (req, res) => {
+    console.log('Got body:', req.body)
+    let data = {
+        response_type: 'in_channel',
+        text: 'Got your command!',
+        attachments: [
+            {
+                image_url:
+                    'https://www.pcgamesn.com/wp-content/uploads/2021/09/knights-of-the-old-republic-remake-pc-580x334.jpg',
+            },
+        ],
+    }
+    res.json(data)
 })
 
 // Server error handling

@@ -1,12 +1,14 @@
 let request = require('request')
+const fs = require('fs')
+const jsonResult = fs.readFileSync('./color-results.json')
 
 let options = {
   'method': 'POST',
-  'url': 'https://hooks.slack.com/services/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',
+  'url': 'https://hooks.slack.com/services/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',
   'headers': {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({"text":"Hello from the app, World!"})
+  body: JSON.stringify({"text":`${jsonResult}`})
 }
 
 module.exports = {
